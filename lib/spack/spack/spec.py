@@ -2511,7 +2511,10 @@ class Spec(object):
                         for k,v in self.variants.items():
                             if v.value is False:
                                 del self.variants[k]
-                        write(fmt % str(self.variants), '+')
+                        if self.variants:
+                            write(fmt % str(self.variants), '+')
+                        else:
+                            write(fmt % 'foobar', '+')
                 elif named_str == 'ARCHITECTURE':
                     if self.architecture and str(self.architecture):
                         write(fmt % str(self.architecture) + ' ', ' arch=')
