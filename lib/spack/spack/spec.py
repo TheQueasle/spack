@@ -2508,7 +2508,7 @@ class Spec(object):
                         write(fmt % str(self.variants), '+')
                 elif named_str == 'OPTIONSPLUS':
                     if self.variants:
-                        for k,v self.variants.items():
+                        for k,v in self.variants.items():
                             if v.value is False:
                                 del self.variants[k]
                         write(fmt % str(self.variants), '+')
