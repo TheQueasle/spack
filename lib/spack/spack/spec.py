@@ -2511,6 +2511,14 @@ class Spec(object):
                         for k,v in self.variants.items():
                             if v.value is False:
                                 del self.variants[k]
+                            if "=" in v.value:
+                                # Remove spaces from v.value
+                                # Convert v.value into +feature
+                                # ' toolkit=gtk ' -> '+gtk'
+                                # Add to self.variants[]
+                                # Remove nasty self.variants[k]
+                                new_v = v.value.split('=')[1].trim()
+                                self.variants[k] = new_v
                         if any(self.variants):
                             write(fmt % str(self.variants), '+')
                 elif named_str == 'ARCHITECTURE':
