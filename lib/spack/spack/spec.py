@@ -2505,8 +2505,14 @@ class Spec(object):
                     if self.compiler:
                         write(fmt % str(self.compiler_flags), '%')
                 elif named_str == 'OPTIONS':
-                    if self.variants:
                         write(fmt % str(self.variants), '+')
+                elif named_str == 'OPTIONSPLUS':
+                    if self.variants:
+                        for k,v in self.variants.items():
+                            if v.value is False:
+                                del self.variants[k]
+                        if any(self.variants):
+                            write(fmt % str(self.variants), '+')
                 elif named_str == 'ARCHITECTURE':
                     if self.architecture and str(self.architecture):
                         write(fmt % str(self.architecture) + ' ', ' arch=')
